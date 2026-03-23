@@ -1,14 +1,13 @@
-'use client'
-
 import React from 'react'
 import { 
   CheckCircle2, 
-  Circle, 
   Trash2, 
   Calendar, 
   Clock,
-  ChevronRight,
-  MoreVertical
+  Tag,
+  Flag,
+  RefreshCw,
+  AlertTriangle
 } from 'lucide-react'
 import { Task } from '@/types'
 import { cn } from '@/lib/utils'
@@ -27,9 +26,19 @@ export function TaskCard({
   className
 }: TaskCardProps) {
   const isCompleted = task.status === 'completed'
+  const isOverdue = task.due_date && new Date(task.due_date) < new Date() && !isCompleted
+
+  const priorityColors = {
+    low: 'bg-blue-50 text-blue-600 border-blue-100',
+    medium: 'bg-amber-50 text-amber-600 border-amber-100',
+    high: 'bg-rose-50 text-rose-600 border-rose-100'
+  }
+
+  const tagsList = task.tags ? task.tags.split(',').map(t => t.trim()).filter(t => t !== '') : []
 
   return (
     <div
+      id={`task-${task.id}`}
       className={cn(
         "group relative bg-white rounded-3xl p-6 border border-slate-200/60 shadow-sm hover:shadow-xl hover:shadow-indigo-100/50 transition-all duration-500 overflow-hidden",
         isCompleted && "bg-slate-50/50 border-slate-100",
@@ -57,17 +66,33 @@ export function TaskCard({
         </button>
 
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-3 mb-1.5">
+          <div className="flex items-center flex-wrap gap-2 mb-2">
             <h3
               className={cn(
-                "text-lg font-black tracking-tight transition-all duration-300",
+                "text-lg font-black tracking-tight transition-all duration-300 mr-1",
                 isCompleted ? "text-slate-400 line-through" : "text-slate-900"
               )}
             >
               {task.title}
             </h3>
+            
+            {/* Priority Badge */}
+            <span className={cn(
+              "px-2 py-0.5 text-[9px] font-black uppercase tracking-widest rounded-lg border",
+              priorityColors[task.priority]
+            )}>
+              {task.priority}
+            </span>
+
+            {task.is_recurring && (
+              <span className="flex items-center gap-1 px-2 py-0.5 bg-indigo-50 text-indigo-600 text-[9px] font-black uppercase tracking-widest rounded-lg border border-indigo-100">
+                <RefreshCw className="w-2.5 h-2.5" />
+                {task.recurrence_interval}
+              </span>
+            )}
+
             {isCompleted && (
-              <span className="px-2 py-0.5 bg-green-100 text-green-600 text-[10px] font-black uppercase tracking-widest rounded-lg ring-1 ring-green-200">
+              <span className="px-2 py-0.5 bg-green-100 text-green-600 text-[9px] font-black uppercase tracking-widest rounded-lg border border-green-200">
                 Done
               </span>
             )}
@@ -84,10 +109,31 @@ export function TaskCard({
             </p>
           )}
 
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2 text-[11px] font-bold text-slate-400 uppercase tracking-widest">
-              <Calendar className="w-3.5 h-3.5 text-indigo-400" />
-              <span>{new Date(task.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</span>
+          {/* Tags */}
+          {tagsList.length > 0 && (
+            <div className="flex flex-wrap gap-1.5 mb-4">
+              {tagsList.map((tag, idx) => (
+                <span key={idx} className="flex items-center gap-1 px-2 py-1 bg-slate-100 text-slate-500 text-[10px] font-bold rounded-lg group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">
+                  <Tag className="w-2.5 h-2.5" />
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+
+          <div className="flex flex-wrap items-center gap-y-2 gap-x-6">
+            <div className={cn(
+              "flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest",
+              isOverdue ? "text-rose-500" : "text-slate-400"
+            )}>
+              <Calendar className={cn("w-3.5 h-3.5", isOverdue ? "text-rose-500" : "text-indigo-400")} />
+              <span>
+                {task.due_date 
+                  ? new Date(task.due_date).toLocaleString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
+                  : new Date(task.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
+                }
+              </span>
+              {isOverdue && <AlertTriangle className="w-3.5 h-3.5 animate-pulse" />}
             </div>
             
             {task.updated_at !== task.created_at && (
@@ -108,15 +154,12 @@ export function TaskCard({
           >
             <Trash2 className="w-5 h-5" />
           </button>
-          <button className="p-2.5 rounded-xl text-slate-300 hover:text-slate-600 hover:bg-slate-50 transition-all md:hidden">
-            <MoreVertical className="w-5 h-5" />
-          </button>
         </div>
       </div>
       
-      {/* Subtle indicator for incomplete high-priority tasks (future) */}
-      {!isCompleted && (
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-indigo-500 rounded-r-full opacity-0 group-hover:opacity-100 transition-opacity" />
+      {/* Subtle indicator for high-priority tasks */}
+      {!isCompleted && task.priority === 'high' && (
+        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-10 bg-rose-500 rounded-r-full shadow-[0_0_15px_rgba(244,63,94,0.5)] transition-all" />
       )}
     </div>
   )

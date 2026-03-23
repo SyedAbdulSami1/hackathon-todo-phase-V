@@ -122,8 +122,22 @@ export class ApiClient {
   // Task Methods
   // ============================================
 
-  getTasks = async (status?: TaskStatus): Promise<Task[]> => {
-    const params = (status && status !== 'all') ? { status } : {}
+  getTasks = async (
+    status?: TaskStatus, 
+    priority?: string, 
+    tags?: string, 
+    search?: string,
+    sort_by?: string,
+    order?: string
+  ): Promise<Task[]> => {
+    const params: any = {}
+    if (status && status !== 'all') params.status = status
+    if (priority && priority !== 'all') params.priority = priority
+    if (tags) params.tags = tags
+    if (search) params.search = search
+    if (sort_by) params.sort_by = sort_by
+    if (order) params.order = order
+    
     return this.instance.get<Task[]>('/api/tasks', { params }) as any as Promise<Task[]>
   }
 
@@ -137,6 +151,10 @@ export class ApiClient {
 
   deleteTask = async (id: number): Promise<void> => {
     await this.instance.delete(`/api/tasks/${id}`)
+  }
+
+  getReminders = async (): Promise<Task[]> => {
+    return this.instance.get<Task[]>('/api/tasks/reminders') as any as Promise<Task[]>
   }
 
   // ============================================

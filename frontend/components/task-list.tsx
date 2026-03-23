@@ -4,7 +4,9 @@ import { useState, useEffect, useCallback } from 'react'
 import { TaskCard } from './task-card'
 import { TaskFilters } from './task-filters'
 import { TaskForm } from './task-form'
+import { Reminders } from './reminders'
 import { NoTasksEmptyState, AllTasksCompletedEmptyState, NoFilteredTasksEmptyState } from './empty-state'
+// ... rest of imports
 import { LoadingSkeleton } from './loading-skeleton'
 import { ErrorBoundary } from './error-boundary'
 import { Card } from '@/components/ui/card'
@@ -19,13 +21,24 @@ export function TaskList() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [filterStatus, setFilterStatus] = useState<TaskStatus>('all')
+  const [filterPriority, setFilterPriority] = useState<string>('all')
+  const [searchQuery, setSearchQuery] = useState<string>('')
+  const [sortBy, setSortBy] = useState<string>('priority')
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
   const [isCreating, setIsCreating] = useState(false)
 
   const fetchTasks = useCallback(async () => {
     try {
       setLoading(true)
       setError(null)
-      const data = await apiClient.getTasks(filterStatus)
+      const data = await apiClient.getTasks(
+        filterStatus,
+        filterPriority,
+        undefined, // tags handled by search in backend for now
+        searchQuery,
+        sortBy,
+        sortOrder
+      )
       setTasks(data)
     } catch (err) {
       console.error('Error fetching tasks:', err)
@@ -33,7 +46,7 @@ export function TaskList() {
     } finally {
       setLoading(false)
     }
-  }, [filterStatus])
+  }, [filterStatus, filterPriority, searchQuery, sortBy, sortOrder])
 
   useEffect(() => {
     fetchTasks()
@@ -86,16 +99,14 @@ export function TaskList() {
 
   const clearFilter = () => {
     setFilterStatus('all')
+    setFilterPriority('all')
+    setSearchQuery('')
   }
 
-  // Filter tasks based on status
-  const filteredTasks = tasks.filter(task => {
-    if (filterStatus === 'all') return true
-    return task.status === filterStatus
-  })
+  // Frontend filtering is now minimal as backend handles most of it
+  const filteredTasks = tasks;
 
   const completedCount = tasks.filter(t => t.status === 'completed').length
-  const pendingCount = tasks.filter(t => t.status === 'pending').length
 
   return (
     <ErrorBoundary>
@@ -108,23 +119,36 @@ export function TaskList() {
 
         {/* Main Content Section */}
         <div className="space-y-8">
+          {/* Reminders/Notifications */}
+          <Reminders />
+
           {/* Header & Filters */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div className="space-y-1">
-              <h2 className="text-3xl font-black text-slate-900 tracking-tight flex items-center gap-3">
-                Active Objectives
-                <span className="text-[10px] bg-indigo-50 text-indigo-600 px-2 py-1 rounded-lg uppercase tracking-[0.2em] font-bold">
-                  {tasks.length} Total
-                </span>
-              </h2>
-              <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">
-                Master your productivity with SyncronAI
-              </p>
+          <div className="space-y-6">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+              <div className="space-y-1">
+                <h2 className="text-3xl font-black text-slate-900 tracking-tight flex items-center gap-3">
+                  Active Objectives
+                  <span className="text-[10px] bg-indigo-50 text-indigo-600 px-2 py-1 rounded-lg uppercase tracking-[0.2em] font-bold">
+                    {tasks.length} Found
+                  </span>
+                </h2>
+                <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">
+                  Master your productivity with SyncronAI Phase 5
+                </p>
+              </div>
             </div>
             
             <TaskFilters
               currentFilter={filterStatus}
               onFilterChange={setFilterStatus}
+              currentPriority={filterPriority}
+              onPriorityChange={setFilterPriority}
+              searchQuery={searchQuery}
+              onSearchChange={setSearchQuery}
+              sortBy={sortBy}
+              onSortByChange={setSortBy}
+              sortOrder={sortOrder}
+              onSortOrderChange={setSortOrder}
             />
           </div>
 

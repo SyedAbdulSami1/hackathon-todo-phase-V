@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Plus, AlertCircle, CheckCircle, Sparkles, X } from 'lucide-react'
-import { CreateTaskRequest } from '@/types'
+import { Plus, AlertCircle, CheckCircle, Sparkles, X, Calendar, Tag, Flag, RefreshCw } from 'lucide-react'
+import { CreateTaskRequest, Priority, RecurrenceInterval } from '@/types'
 import { cn } from '@/lib/utils'
 
 interface TaskFormProps {
@@ -14,7 +14,12 @@ interface TaskFormProps {
 export function TaskForm({ onSubmit, className, isLoading = false }: TaskFormProps) {
   const [formData, setFormData] = useState({
     title: '',
-    description: ''
+    description: '',
+    priority: 'medium' as Priority,
+    tags: '',
+    due_date: '',
+    is_recurring: false,
+    recurrence_interval: 'none' as RecurrenceInterval
   })
   const [errors, setErrors] = useState<{ title?: string; description?: string }>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -40,9 +45,22 @@ export function TaskForm({ onSubmit, className, isLoading = false }: TaskFormPro
     try {
       await onSubmit({
         title: formData.title.trim(),
-        description: formData.description.trim() || undefined
+        description: formData.description.trim() || undefined,
+        priority: formData.priority,
+        tags: formData.tags.trim() || undefined,
+        due_date: formData.due_date || undefined,
+        is_recurring: formData.is_recurring,
+        recurrence_interval: formData.recurrence_interval
       })
-      setFormData({ title: '', description: '' })
+      setFormData({ 
+        title: '', 
+        description: '', 
+        priority: 'medium', 
+        tags: '', 
+        due_date: '', 
+        is_recurring: false, 
+        recurrence_interval: 'none' 
+      })
       setSuccess(true)
       setTimeout(() => {
         setSuccess(false)
@@ -109,12 +127,87 @@ export function TaskForm({ onSubmit, className, isLoading = false }: TaskFormPro
                 placeholder="Add context, links, or details..."
                 value={formData.description}
                 onChange={(e) => setFormData({...formData, description: e.target.value})}
-                className="w-full px-6 py-4 bg-white border border-slate-200 rounded-2xl font-bold text-slate-900 placeholder:text-slate-300 focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500/50 outline-none transition-all min-h-[120px] resize-none"
+                className="w-full px-6 py-4 bg-white border border-slate-200 rounded-2xl font-bold text-slate-900 placeholder:text-slate-300 focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500/50 outline-none transition-all min-h-[100px] resize-none"
                 disabled={isSubmitting}
               />
             </div>
 
-            <div className="pt-2 flex gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1 flex items-center gap-1.5">
+                  <Flag className="w-3 h-3" /> Priority
+                </label>
+                <select
+                  value={formData.priority}
+                  onChange={(e) => setFormData({...formData, priority: e.target.value as Priority})}
+                  className="w-full px-6 py-4 bg-white border border-slate-200 rounded-2xl font-bold text-slate-900 outline-none focus:ring-4 focus:ring-indigo-500/10 transition-all appearance-none cursor-pointer"
+                  disabled={isSubmitting}
+                >
+                  <option value="low">Low Priority</option>
+                  <option value="medium">Medium Priority</option>
+                  <option value="high">High Priority</option>
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1 flex items-center gap-1.5">
+                  <Calendar className="w-3 h-3" /> Due Date
+                </label>
+                <input
+                  type="datetime-local"
+                  value={formData.due_date}
+                  onChange={(e) => setFormData({...formData, due_date: e.target.value})}
+                  className="w-full px-6 py-4 bg-white border border-slate-200 rounded-2xl font-bold text-slate-900 outline-none focus:ring-4 focus:ring-indigo-500/10 transition-all cursor-pointer"
+                  disabled={isSubmitting}
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1 flex items-center gap-1.5">
+                  <Tag className="w-3 h-3" /> Tags
+                </label>
+                <input
+                  placeholder="e.g. work, urgent, personal"
+                  value={formData.tags}
+                  onChange={(e) => setFormData({...formData, tags: e.target.value})}
+                  className="w-full px-6 py-4 bg-white border border-slate-200 rounded-2xl font-bold text-slate-900 placeholder:text-slate-300 outline-none focus:ring-4 focus:ring-indigo-500/10 transition-all"
+                  disabled={isSubmitting}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1 flex items-center gap-1.5">
+                  <RefreshCw className="w-3 h-3" /> Recurrence
+                </label>
+                <div className="flex gap-2">
+                  <div className="flex items-center gap-2 bg-white border border-slate-200 rounded-2xl px-4 py-4 min-w-[100px]">
+                    <input
+                      type="checkbox"
+                      id="is_recurring"
+                      checked={formData.is_recurring}
+                      onChange={(e) => setFormData({...formData, is_recurring: e.target.checked})}
+                      className="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                    />
+                    <label htmlFor="is_recurring" className="text-sm font-bold text-slate-700 cursor-pointer">Repeat</label>
+                  </div>
+                  {formData.is_recurring && (
+                    <select
+                      value={formData.recurrence_interval}
+                      onChange={(e) => setFormData({...formData, recurrence_interval: e.target.value as RecurrenceInterval})}
+                      className="flex-1 px-6 py-4 bg-white border border-slate-200 rounded-2xl font-bold text-slate-900 outline-none focus:ring-4 focus:ring-indigo-500/10 transition-all appearance-none cursor-pointer"
+                    >
+                      <option value="daily">Daily</option>
+                      <option value="weekly">Weekly</option>
+                      <option value="monthly">Monthly</option>
+                    </select>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-4 flex gap-3">
               <button
                 type="submit"
                 disabled={!formData.title.trim() || isSubmitting}
@@ -123,9 +216,9 @@ export function TaskForm({ onSubmit, className, isLoading = false }: TaskFormPro
                 {isSubmitting ? (
                   <LoaderIcon className="w-5 h-5 animate-spin" />
                 ) : success ? (
-                  <span className="flex items-center"><CheckCircle className="w-5 h-5 mr-2" /> Task Launched</span>
+                  <span className="flex items-center"><CheckCircle className="w-5 h-5 mr-2" /> Mission Initiated</span>
                 ) : (
-                  <span className="flex items-center"><Plus className="w-5 h-5 mr-2" /> Create Task</span>
+                  <span className="flex items-center"><Plus className="w-5 h-5 mr-2" /> Launch Mission</span>
                 )}
               </button>
               <button

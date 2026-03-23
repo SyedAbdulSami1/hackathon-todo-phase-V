@@ -5,11 +5,19 @@ export interface User {
   created_at: string
 }
 
+export type Priority = 'low' | 'medium' | 'high'
+export type RecurrenceInterval = 'none' | 'daily' | 'weekly' | 'monthly'
+
 export interface Task {
   id: number
   title: string
   description?: string
   status: 'pending' | 'in_progress' | 'completed'
+  priority: Priority
+  tags?: string
+  due_date?: string
+  is_recurring: boolean
+  recurrence_interval: RecurrenceInterval
   created_at: string
   updated_at: string
   user_id: string
@@ -18,12 +26,22 @@ export interface Task {
 export interface CreateTaskRequest {
   title: string
   description?: string
+  priority?: Priority
+  tags?: string
+  due_date?: string
+  is_recurring?: boolean
+  recurrence_interval?: RecurrenceInterval
 }
 
 export interface UpdateTaskRequest {
   title?: string
   description?: string
   status?: 'pending' | 'in_progress' | 'completed'
+  priority?: Priority
+  tags?: string
+  due_date?: string
+  is_recurring?: boolean
+  recurrence_interval?: RecurrenceInterval
 }
 
 export interface LoginRequest {
