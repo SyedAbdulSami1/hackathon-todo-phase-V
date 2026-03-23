@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build:*)",
+      "Bash(npm install:*)",
+      "Bash(python -m pytest:*)",
+      "Bash(python -c:*)",
+      "Bash(dir:*)",
+      "Bash(python run_tests.py:*)",
+      "Bash(python verify_tests.py:*)",
+      "Bash(findstr:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(.specify/scripts/bash/create-phr.sh --title \"Phase IV Constitution Update\" --stage constitution --json)",
+      "Bash(powershell -ExecutionPolicy Bypass -File \".specify/scripts/powershell/setup-plan.ps1\" -Json)",
+      "Bash(powershell -ExecutionPolicy Bypass -File \".specify/scripts/powershell/update-agent-context.ps1\" -AgentType claude)",
+      "Bash(.specify/scripts/bash/create-phr.sh --title \"Phase IV Kubernetes Deployment Plan\" --stage plan --feature kubernetes-deployment --json)",
+      "Bash(powershell -ExecutionPolicy Bypass -File \".specify/scripts/powershell/check-prerequisites.ps1\" -Json)",
+      "Bash(.specify/scripts/powershell/setup-plan.ps1:*)",
+      "Bash(.specify/scripts/powershell/check-prerequisites.ps1:*)",
+      "Bash(powershell.exe:*)",
+      "Bash(powershell:*)",
+      "Bash(vercel login)",
+      "mcp__Neon__get_database_tables",
+      "mcp__Neon__describe_branch",
+      "mcp__Neon__run_sql"
+    ]
+  }
+}

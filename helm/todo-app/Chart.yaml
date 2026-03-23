@@ -1,0 +1,11 @@
+apiVersion: v2
+name: todo-app
+description: A Helm chart for the Todo application with Kubernetes deployment
+
+# This is the chart version. This version number should be incremented each time you make changes
+# to the chart and its templates.
+version: 0.1.0
+
+# This is the version number of the application being deployed. This version number should be
+# incremented each time you publish a new version of your application.
+appVersion: "latest"

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-frontend-config
+  namespace: {{ .Values.global.namespace }}
+  labels:
+    app: {{ .Release.Name }}-frontend
+    chart: {{ .Chart.Name }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  NODE_ENV: {{ .Values.frontend.environment.NODE_ENV | quote }}
+  NEXT_PUBLIC_API_URL: {{ .Values.frontend.environment.NEXT_PUBLIC_API_URL | quote }}
+  NEXT_PUBLIC_CHAT_ENABLED: {{ .Values.frontend.environment.NEXT_PUBLIC_CHAT_ENABLED | quote }}

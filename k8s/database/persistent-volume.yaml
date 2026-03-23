@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: todo-database-pv
+  namespace: todo
+  labels:
+    app: todo-database
+    type: local
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data/todo-database"
+  persistentVolumeReclaimPolicy: Retain

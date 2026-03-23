@@ -1,0 +1,243 @@
+# Global settings
+global:
+  # Image pull policy
+  imagePullPolicy: IfNotPresent
+  # Service type
+  serviceType: ClusterIP
+  # Namespace
+  namespace: todo-app
+
+# Frontend configuration
+frontend:
+  # Image settings
+  image:
+    repository: todo-frontend
+    tag: latest
+    pullPolicy: IfNotPresent
+
+  # Service configuration
+  service:
+    port: 3000
+    targetPort: 3000
+    name: frontend-service
+
+  # Deployment settings
+  deployment:
+    replicas: 2
+    resources:
+      limits:
+        cpu: 100m
+        memory: 256Mi
+      requests:
+        cpu: 50m
+        memory: 128Mi
+    healthCheck:
+      livenessProbe:
+        httpGet:
+          path: /
+          port: 3000
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        timeoutSeconds: 5
+      readinessProbe:
+        httpGet:
+          path: /
+          port: 3000
+        initialDelaySeconds: 5
+        periodSeconds: 10
+        timeoutSeconds: 5
+
+  # Environment variables
+  environment:
+    NODE_ENV: production
+    NEXT_PUBLIC_API_URL: "http://backend-service:8000"
+    NEXT_PUBLIC_CHAT_ENABLED: "true"
+
+# Backend configuration
+backend:
+  # Image settings
+  image:
+    repository: todo-backend
+    tag: latest
+    pullPolicy: IfNotPresent
+
+  # Service configuration
+  service:
+    port: 8000
+    targetPort: 8000
+    name: backend-service
+
+  # Deployment settings
+  deployment:
+    replicas: 2
+    resources:
+      limits:
+        cpu: 250m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 256Mi
+    healthCheck:
+      livenessProbe:
+        httpGet:
+          path: /api/health
+          port: 8000
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        timeoutSeconds: 5
+      readinessProbe:
+        httpGet:
+          path: /api/health
+          port: 8000
+        initialDelaySeconds: 5
+        periodSeconds: 10
+        timeoutSeconds: 5
+
+  # Environment variables
+  environment:
+    HOST: "0.0.0.0"
+    PORT: "8000"
+    DATABASE_URL: "postgresql://neondb_owner:npg_Fgza3YAJV9qT@ep-snowy-wave-aino2mts-pooler.c-4.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+    SECRET_KEY: "bf84996e7821a6617798fd0f189133cdcb1773b9910cc5107b64a09277cbda6c"
+    ALGORITHM: "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: "30"
+    CORS_ORIGINS: '["http://localhost:3000", "http://127.0.0.1:3000"]'
+
+    # AI Chatbot configuration
+    GOOGLE_API_KEY: "${GOOGLE_API_KEY}"
+    AGENT_MODEL_NAME: "gemini-2.5-flash"
+    AGENT_PROVIDER: "google"
+    AGENT_TEMPERATURE: "0.7"
+    ENABLE_MCP_TOOLS: "true"
+    TOOL_EXECUTION_TIMEOUT: "30"
+    MAX_CONTEXT_LENGTH: "4096"
+    MAX_HISTORY_MESSAGES: "20"
+    RETRY_ATTEMPTS: "3"
+    FALLBACK_ON_ERROR: "true"
+
+# Chat-agent configuration (part of backend)
+chatAgent:
+  # Image settings (uses same image as backend)
+  image:
+    repository: todo-backend
+    tag: latest
+    pullPolicy: IfNotPresent
+
+  # Service configuration (not exposed separately)
+  service:
+    enabled: false
+
+  # Deployment settings
+  deployment:
+    replicas: 1
+    resources:
+      limits:
+        cpu: 100m
+        memory: 256Mi
+      requests:
+        cpu: 50m
+        memory: 128Mi
+
+  # Environment variables
+  environment:
+    # Inherits all backend environment variables
+    AGENT_ENABLED: "true"
+    AGENT_MODEL_NAME: "gemini-2.5-flash"
+    AGENT_PROVIDER: "google"
+    AGENT_TEMPERATURE: "0.7"
+    ENABLE_MCP_TOOLS: "true"
+    TOOL_EXECUTION_TIMEOUT: "30"
+    MAX_CONTEXT_LENGTH: "4096"
+    MAX_HISTORY_MESSAGES: "20"
+    RETRY_ATTEMPTS: "3"
+    FALLBACK_ON_ERROR: "true"
+
+# Database configuration (external Neon)
+database:
+  # External database configuration
+  enabled: true
+  type: external
+  url: "postgresql://neondb_owner:npg_Fgza3YAJV9qT@ep-snowy-wave-aino2mts-pooler.c-4.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+
+  # If using internal PostgreSQL (not recommended for this setup)
+  internal:
+    enabled: false
+    image:
+      repository: postgres
+      tag: 15
+    service:
+      port: 5432
+    persistence:
+      enabled: true
+      size: 8Gi
+
+# Ingress configuration
+ingress:
+  enabled: false
+  className: "nginx"
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  hosts:
+    - host: todo-app.local
+      paths:
+        - path: /
+          pathType: Prefix
+        - path: /api
+          pathType: Prefix
+
+# Network policies
+networkPolicy:
+  enabled: true
+  frontend:
+    egress:
+      - to: []
+        ports:
+          - protocol: TCP
+            port: 8000
+  backend:
+    egress:
+      - to: []
+        ports:
+          - protocol: TCP
+            port: 5432
+      - to: []
+        ports:
+          - protocol: TCP
+            port: 443
+
+# Auto-scaling configuration
+autoscaling:
+  enabled: false
+  frontend:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 5
+    targetCPUUtilizationPercentage: 80
+  backend:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 5
+    targetCPUUtilizationPercentage: 80
+
+# Security settings
+security:
+  # RBAC configuration
+  rbac:
+    enabled: false
+    create: true
+
+  # Service accounts
+  serviceAccount:
+    enabled: false
+    create: true
+    name: "todo-app-service-account"
+
+# Monitoring configuration
+monitoring:
+  enabled: false
+  prometheus:
+    enabled: false
+    serviceMonitor:
+      enabled: false
+      interval: 30s
+      scrapeTimeout: 10s

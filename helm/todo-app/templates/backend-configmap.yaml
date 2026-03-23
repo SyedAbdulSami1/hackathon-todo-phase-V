@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-backend-config
+  namespace: {{ .Values.global.namespace }}
+  labels:
+    app: {{ .Release.Name }}-backend
+    chart: {{ .Chart.Name }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  HOST: {{ .Values.backend.environment.HOST | quote }}
+  PORT: {{ .Values.backend.environment.PORT | quote }}
+  CORS_ORIGINS: {{ .Values.backend.environment.CORS_ORIGINS | quote }}
+  ALGORITHM: {{ .Values.backend.environment.ALGORITHM | quote }}
+  ACCESS_TOKEN_EXPIRE_MINUTES: {{ .Values.backend.environment.ACCESS_TOKEN_EXPIRE_MINUTES | quote }}
+  DATABASE_URL: {{ .Values.backend.environment.DATABASE_URL | quote }}
+  SECRET_KEY: {{ .Values.backend.environment.SECRET_KEY | quote }}
+  AGENT_MODEL_NAME: {{ .Values.backend.environment.AGENT_MODEL_NAME | quote }}
+  AGENT_PROVIDER: {{ .Values.backend.environment.AGENT_PROVIDER | quote }}
+  AGENT_TEMPERATURE: {{ .Values.backend.environment.AGENT_TEMPERATURE | quote }}
+  ENABLE_MCP_TOOLS: {{ .Values.backend.environment.ENABLE_MCP_TOOLS | quote }}
+  TOOL_EXECUTION_TIMEOUT: {{ .Values.backend.environment.TOOL_EXECUTION_TIMEOUT | quote }}
+  MAX_CONTEXT_LENGTH: {{ .Values.backend.environment.MAX_CONTEXT_LENGTH | quote }}
+  MAX_HISTORY_MESSAGES: {{ .Values.backend.environment.MAX_HISTORY_MESSAGES | quote }}
+  RETRY_ATTEMPTS: {{ .Values.backend.environment.RETRY_ATTEMPTS | quote }}
+  FALLBACK_ON_ERROR: {{ .Values.backend.environment.FALLBACK_ON_ERROR | quote }}

@@ -1,0 +1,246 @@
+openapi: 3.0.0
+info:
+  title: Kubernetes Deployment API
+  description: API for managing Kubernetes deployments using AI-powered operations
+  version: 1.0.0
+  contact:
+    name: Todo Team
+    email: todo@example.com
+
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+
+paths:
+  /api/deployments:
+    post:
+      summary: Create a new deployment
+      description: Deploy a containerized application to Kubernetes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - chart
+                - namespace
+              properties:
+                name:
+                  type: string
+                  description: Deployment name
+                  example: "todo-frontend"
+                chart:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: Helm chart name
+                      example: "todo-frontend"
+                    version:
+                      type: string
+                      description: Chart version
+                      example: "1.0.0"
+                    values:
+                      type: object
+                      description: Chart values
+                      example:
+                        replicas: 2
+                        resources:
+                          limits:
+                            cpu: "500m"
+                            memory: "512Mi"
+                namespace:
+                  type: string
+                  description: Kubernetes namespace
+                  example: "todo"
+                image:
+                  type: string
+                  description: Container image
+                  example: "todo-frontend:1.0.0"
+      responses:
+        201:
+          description: Deployment created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "deploy-12345"
+                  name:
+                    type: string
+                  status:
+                    type: string
+                    example: "pending"
+                  created_at:
+                    type: string
+                    format: date-time
+        400:
+          description: Invalid request
+        409:
+          description: Deployment already exists
+
+  /api/deployments/{name}:
+    get:
+      summary: Get deployment status
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Deployment status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  status:
+                    type: string
+                  replicas:
+                    type: object
+                    properties:
+                      desired:
+                        type: integer
+                      ready:
+                        type: integer
+                      available:
+                        type: integer
+                  conditions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        status:
+                          type: string
+                        last_transition_time:
+                          type: string
+                          format: date-time
+    put:
+      summary: Update deployment
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                replicas:
+                  type: integer
+                image:
+                  type: string
+      responses:
+        200:
+          description: Deployment updated
+    delete:
+      summary: Delete deployment
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Deployment deleted
+
+  /api/ai/commands:
+    post:
+      summary: Execute AI-powered Kubernetes command
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - command
+                - tool
+              properties:
+                command:
+                  type: string
+                  description: Natural language command
+                  example: "scale frontend to 3 replicas"
+                tool:
+                  type: string
+                  enum: [kubectl-ai, kagent]
+                namespace:
+                  type: string
+                  description: Kubernetes namespace
+      responses:
+        200:
+          description: Command executed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  command_id:
+                    type: string
+                  result:
+                    type: object
+                    properties:
+                      success:
+                        type: boolean
+                      output:
+                        type: string
+                      error:
+                        type: string
+                  timestamp:
+                    type: string
+                    format: date-time
+
+  /api/health:
+    get:
+      summary: Health check
+      responses:
+        200:
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "healthy"
+                  timestamp:
+                    type: string
+                    format: date-time
+                  components:
+                    type: object
+                    properties:
+                      kubernetes:
+                        type: string
+                      database:
+                        type: string
+                      frontend:
+                        type: string
+                      backend:
+                        type: string
+
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+        details:
+          type: object

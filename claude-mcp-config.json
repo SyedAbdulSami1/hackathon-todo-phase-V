@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "vercel-todo-server": {
+      "command": "http",
+      "url": "https://hackathon-todo-phase-iv.vercel.app/api/mcp"
+    }
+  }
+}

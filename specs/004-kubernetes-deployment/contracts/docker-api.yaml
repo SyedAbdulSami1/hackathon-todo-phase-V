@@ -1,0 +1,147 @@
+openapi: 3.0.0
+info:
+  title: Container Registry API
+  description: API for managing container images and builds
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:5000
+    description: Local registry server
+
+paths:
+  /api/images:
+    post:
+      summary: Build and push container image
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - dockerfile
+                - context
+              properties:
+                name:
+                  type: string
+                  example: "todo-frontend"
+                dockerfile:
+                  type: string
+                  example: "frontend/Dockerfile"
+                context:
+                  type: string
+                  example: "./frontend"
+                tag:
+                  type: string
+                  example: "1.0.0"
+      responses:
+        201:
+          description: Image built successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  tag:
+                    type: string
+                  size_mb:
+                    type: number
+                  digest:
+                    type: string
+                  scan_results:
+                    type: object
+                    properties:
+                      critical:
+                        type: integer
+                      high:
+                        type: integer
+                      medium:
+                        type: integer
+                      low:
+                        type: integer
+    get:
+      summary: List images
+      responses:
+        200:
+          description: List of images
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    tag:
+                      type: string
+                    size_mb:
+                      type: number
+                    created_at:
+                      type: string
+                      format: date-time
+
+  /api/images/{name}/scan:
+    post:
+      summary: Scan image for vulnerabilities
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Scan completed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  vulnerabilities:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        severity:
+                          type: string
+                          enum: [CRITICAL, HIGH, MEDIUM, LOW]
+                        package:
+                          type: string
+                        description:
+                          type: string
+                        fixed_version:
+                          type: string
+
+  /api/images/{name}/optimize:
+    post:
+      summary: Optimize image size
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Image optimized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  original_size:
+                    type: number
+                  optimized_size:
+                    type: number
+                  savings:
+                    type: number
+                  optimizations:
+                    type: array
+                    items:
+                      type: string

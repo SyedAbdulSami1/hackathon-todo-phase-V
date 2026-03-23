@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="backend" tests="66" failures="2" errors="0" skipped="0" timestamp="2026-03-12T08:48:51" time="9.123">
+    <testcase classname="tests.integration.test_chat_endpoints" name="test_post_chat_endpoint_success" time="0.234">
+      <failure message="assert 500 == 200">AttributeError: 'str' object has no attribute 'hex'</failure>
+    </testcase>
+    <testcase classname="tests.integration.test_chat_endpoints" name="test_post_chat_endpoint_missing_message" time="0.045"/>
+    <testcase classname="tests.integration.test_chat_endpoints" name="test_post_chat_endpoint_invalid_user_id" time="0.032"/>
+    <testcase classname="tests.integration.test_chat_endpoints" name="test_get_user_conversations" time="0.056"/>
+    <testcase classname="tests.integration.test_chat_endpoints" name="test_get_conversation_history" time="0.048"/>
+    <testcase classname="tests.integration.test_chat_endpoints" name="test_get_conversation_history_not_found" time="0.034"/>
+    <testcase classname="tests.integration.test_chat_endpoints" name="test_get_conversation_history_wrong_user" time="0.041"/>
+    <testcase classname="tests.integration.test_chat_endpoints" name="test_post_chat_endpoint_internal_error" time="0.187">
+      <failure message="assert 'Internal server error' in error"/>
+    </testcase>
+    <testcase classname="tests.integration.test_chat_endpoints" name="test_post_chat_endpoint_agent_not_initialized" time="0.029"/>
+    <testcase classname="tests.test_main" name="test_app_is_created" time="0.012"/>
+    <testcase classname="tests.test_main" name="test_root_endpoint" time="0.034"/>
+    <testcase classname="tests.test_main" name="test_health_check_endpoint" time="0.028"/>
+    <testcase classname="tests.test_main" name="test_app_has_expected_routes" time="0.015"/>
+    <testcase classname="tests.test_main" name="test_app_has_correct_tags" time="0.011"/>
+    <testcase classname="tests.test_main" name="test_openapi_schema" time="0.067"/>
+    <testcase classname="tests.test_main" name="test_cors_middleware" time="0.045"/>
+    <testcase classname="tests.test_main" name="test_main_app_lifespan" time="0.089"/>
+    <testcase classname="tests.test_main" name="test_main_app_lifespan_with_mocked_agent" time="0.076"/>
+    <testcase classname="tests.unit.test_agents" name="test_agent_config_initialization" time="0.023"/>
+    <testcase classname="tests.unit.test_agents" name="test_agent_config_to_dict" time="0.019"/>
+    <testcase classname="tests.unit.test_agents" name="test_chat_agent_initialization" time="0.031"/>
+    <testcase classname="tests.unit.test_agents" name="test_chat_agent_process_request_basic" time="0.042"/>
+    <testcase classname="tests.unit.test_agents" name="test_chat_agent_process_request_with_tools" time="0.038"/>
+    <testcase classname="tests.unit.test_agents" name="test_tool_binder_initialization" time="0.025"/>
+    <testcase classname="tests.unit.test_agents" name="test_agent_factory_create_chat_agent" time="0.034"/>
+    <testcase classname="tests.unit.test_agents" name="test_agent_factory_create_default_agent" time="0.029"/>
+    <testcase classname="tests.unit.test_exceptions" name="test_chat_exception_base" time="0.012"/>
+    <testcase classname="tests.unit.test_exceptions" name="test_chat_exception_custom_error_code" time="0.014"/>
+    <testcase classname="tests.unit.test_exceptions" name="test_conversation_not_found_exception" time="0.016"/>
+    <testcase classname="tests.unit.test_exceptions" name="test_message_not_found_exception" time="0.013"/>
+    <testcase classname="tests.unit.test_exceptions" name="test_unauthorized_access_exception" time="0.015"/>
+    <testcase classname="tests.unit.test_exceptions" name="test_tool_execution_exception" time="0.018"/>
+    <testcase classname="tests.unit.test_exceptions" name="test_tool_execution_exception_no_details" time="0.014"/>
+    <testcase classname="tests.unit.test_exceptions" name="test_agent_processing_exception" time="0.017"/>
+    <testcase classname="tests.unit.test_exceptions" name="test_agent_processing_exception_no_details" time="0.013"/>
+    <testcase classname="tests.unit.test_exceptions" name="test_invalid_request_exception" time="0.015"/>
+    <testcase classname="tests.unit.test_exceptions" name="test_rate_limit_exceeded_exception" time="0.012"/>
+    <testcase classname="tests.unit.test_exceptions" name="test_rate_limit_exceeded_exception_default" time="0.011"/>
+    <testcase classname="tests.unit.test_exceptions" name="test_database_connection_exception" time="0.014"/>
+    <testcase classname="tests.unit.test_exceptions" name="test_database_connection_exception_no_details" time="0.013"/>
+    <testcase classname="tests.unit.test_mcp_tools" name="test_base_mcp_tool_abstract" time="0.009"/>
+    <testcase classname="tests.unit.test_mcp_tools" name="test_add_task_tool_properties" time="0.021"/>
+    <testcase classname="tests.unit.test_mcp_tools" name="test_list_tasks_tool_properties" time="0.019"/>
+    <testcase classname="tests.unit.test_mcp_tools" name="test_update_task_tool_properties" time="0.022"/>
+    <testcase classname="tests.unit.test_mcp_tools" name="test_delete_task_tool_properties" time="0.018"/>
+    <testcase classname="tests.unit.test_mcp_tools" name="test_complete_task_tool_properties" time="0.020"/>
+    <testcase classname="tests.unit.test_mcp_tools" name="test_tool_registry_execute_tool" time="0.025"/>
+    <testcase classname="tests.unit.test_mcp_tools" name="test_tool_registry_get_tool_definitions" time="0.023"/>
+    <testcase classname="tests.unit.test_models" name="test_conversation_creation" time="0.034"/>
+    <testcase classname="tests.unit.test_models" name="test_conversation_defaults" time="0.028"/>
+    <testcase classname="tests.unit.test_models" name="test_message_creation" time="0.031"/>
+    <testcase classname="tests.unit.test_models" name="test_message_enum_values" time="0.026"/>
+    <testcase classname="tests.unit.test_models" name="test_message_optional_fields" time="0.029"/>
+    <testcase classname="tests.unit.test_services" name="test_conversation_service_create_conversation" time="0.045"/>
+    <testcase classname="tests.unit.test_services" name="test_conversation_service_get_conversation_by_id" time="0.038"/>
+    <testcase classname="tests.unit.test_services" name="test_conversation_service_get_user_conversations" time="0.042"/>
+    <testcase classname="tests.unit.test_services" name="test_conversation_service_update_conversation_title" time="0.036"/>
+    <testcase classname="tests.unit.test_services" name="test_conversation_service_delete_conversation" time="0.033"/>
+    <testcase classname="tests.unit.test_services" name="test_message_service_create_message" time="0.041"/>
+    <testcase classname="tests.unit.test_services" name="test_message_service_get_message_by_id" time="0.037"/>
+    <testcase classname="tests.unit.test_services" name="test_message_service_get_messages_for_conversation" time="0.039"/>
+    <testcase classname="tests.unit.test_services" name="test_conversation_loader_initialization" time="0.024"/>
+    <testcase classname="tests.unit.test_services" name="test_conversation_persistence_initialization" time="0.027"/>
+    <testcase classname="tests.unit.test_services" name="test_conversation_persistence_save_new_conversation" time="0.035"/>
+    <testcase classname="tests.unit.test_services" name="test_conversation_persistence_save_message" time="0.032"/>
+    <testcase classname="tests.unit.test_services" name="test_conversation_loader_load_conversation_history" time="0.044"/>
+  </testsuite>
+</testsuites>
