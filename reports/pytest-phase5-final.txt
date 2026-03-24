@@ -1,0 +1,132 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-8.4.0, pluggy-1.6.0 -- C:\Program Files\Python312\python.exe
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.10', 'Platform': 'Windows-10-10.0.19045-SP0', 'Packages': {'pytest': '8.4.0', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.12.1', 'asyncio': '0.24.0', 'cov': '7.0.0', 'metadata': '3.1.1', 'mock': '3.15.1'}}
+rootdir: d:\D Data\Hackthon-Second\hackathon-todo-phase-V\backend
+configfile: pytest.ini
+plugins: anyio-4.12.1, asyncio-0.24.0, cov-7.0.0, metadata-3.1.1, mock-3.15.1
+asyncio: mode=Mode.STRICT, default_loop_scope=None
+collecting ... collected 60 items
+
+tests/unit/test_agents.py::test_agent_config_initialization PASSED       [  1%]
+tests/unit/test_agents.py::test_agent_config_to_dict PASSED              [  3%]
+tests/unit/test_agents.py::test_chat_agent_initialization PASSED         [  5%]
+tests/unit/test_agents.py::test_chat_agent_process_request_basic PASSED  [  6%]
+tests/unit/test_agents.py::test_chat_agent_process_request_with_tools PASSED [  8%]
+tests/unit/test_agents.py::test_tool_binder_initialization PASSED        [ 10%]
+tests/unit/test_agents.py::test_agent_factory_create_chat_agent PASSED   [ 11%]
+tests/unit/test_agents.py::test_agent_factory_create_default_agent PASSED [ 13%]
+tests/unit/test_exceptions.py::test_chat_exception_base PASSED           [ 15%]
+tests/unit/test_exceptions.py::test_chat_exception_custom_error_code PASSED [ 16%]
+tests/unit/test_exceptions.py::test_conversation_not_found_exception PASSED [ 18%]
+tests/unit/test_exceptions.py::test_message_not_found_exception PASSED   [ 20%]
+tests/unit/test_exceptions.py::test_unauthorized_access_exception PASSED [ 21%]
+tests/unit/test_exceptions.py::test_tool_execution_exception PASSED      [ 23%]
+tests/unit/test_exceptions.py::test_tool_execution_exception_no_details PASSED [ 25%]
+tests/unit/test_exceptions.py::test_agent_processing_exception PASSED    [ 26%]
+tests/unit/test_exceptions.py::test_agent_processing_exception_no_details PASSED [ 28%]
+tests/unit/test_exceptions.py::test_invalid_request_exception PASSED     [ 30%]
+tests/unit/test_exceptions.py::test_rate_limit_exceeded_exception PASSED [ 31%]
+tests/unit/test_exceptions.py::test_rate_limit_exceeded_exception_default PASSED [ 33%]
+tests/unit/test_exceptions.py::test_database_connection_exception PASSED [ 35%]
+tests/unit/test_exceptions.py::test_database_connection_exception_no_details PASSED [ 36%]
+tests/unit/test_mcp_tools.py::test_base_mcp_tool_abstract PASSED         [ 38%]
+tests/unit/test_mcp_tools.py::test_add_task_tool_properties PASSED       [ 40%]
+tests/unit/test_mcp_tools.py::test_list_tasks_tool_properties PASSED     [ 41%]
+tests/unit/test_mcp_tools.py::test_update_task_tool_properties PASSED    [ 43%]
+tests/unit/test_mcp_tools.py::test_delete_task_tool_properties PASSED    [ 45%]
+tests/unit/test_mcp_tools.py::test_complete_task_tool_properties PASSED  [ 46%]
+tests/unit/test_mcp_tools.py::test_tool_registry_execute_tool PASSED     [ 48%]
+tests/unit/test_mcp_tools.py::test_tool_registry_get_tool_definitions PASSED [ 50%]
+tests/unit/test_models.py::test_conversation_creation PASSED             [ 51%]
+tests/unit/test_models.py::test_conversation_defaults PASSED             [ 53%]
+tests/unit/test_models.py::test_message_creation PASSED                  [ 55%]
+tests/unit/test_models.py::test_message_enum_values PASSED               [ 56%]
+tests/unit/test_models.py::test_message_optional_fields PASSED           [ 58%]
+tests/unit/test_services.py::test_conversation_service_create_conversation PASSED [ 60%]
+tests/unit/test_services.py::test_conversation_service_get_conversation_by_id PASSED [ 61%]
+tests/unit/test_services.py::test_conversation_service_get_user_conversations PASSED [ 63%]
+tests/unit/test_services.py::test_conversation_service_update_conversation_title PASSED [ 65%]
+tests/unit/test_services.py::test_conversation_service_delete_conversation PASSED [ 66%]
+tests/unit/test_services.py::test_message_service_create_message PASSED  [ 68%]
+tests/unit/test_services.py::test_message_service_get_message_by_id PASSED [ 70%]
+tests/unit/test_services.py::test_message_service_get_messages_for_conversation PASSED [ 71%]
+tests/unit/test_services.py::test_conversation_loader_initialization PASSED [ 73%]
+tests/unit/test_services.py::test_conversation_persistence_initialization PASSED [ 75%]
+tests/unit/test_services.py::test_conversation_persistence_save_new_conversation PASSED [ 76%]
+tests/unit/test_services.py::test_conversation_persistence_save_message PASSED [ 78%]
+tests/unit/test_services.py::test_conversation_loader_load_conversation_history PASSED [ 80%]
+tests/test_main.py::test_app_is_created PASSED                           [ 81%]
+tests/test_main.py::test_root_endpoint PASSED                            [ 83%]
+tests/test_main.py::test_health_check_endpoint PASSED                    [ 85%]
+tests/test_main.py::test_app_has_expected_routes PASSED                  [ 86%]
+tests/test_main.py::test_app_has_correct_tags PASSED                     [ 88%]
+tests/test_main.py::test_openapi_schema PASSED                           [ 90%]
+tests/test_main.py::test_cors_middleware PASSED                          [ 91%]
+tests/test_main.py::test_main_app_lifespan PASSED                        [ 93%]
+tests/test_main.py::test_main_app_lifespan_with_mocked_agent PASSED      [ 95%]
+tests/test_simple_smoke.py::test_app_import PASSED                       [ 96%]
+tests/test_simple_smoke.py::test_models_import PASSED                    [ 98%]
+tests/test_simple_smoke.py::test_auth_import PASSED                      [100%]
+
+============================== warnings summary ===============================
+models\core.py:84
+  d:\D Data\Hackthon-Second\hackathon-todo-phase-V\backend\models\core.py:84: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class TaskResponse(BaseModel):
+
+models\core.py:125
+  d:\D Data\Hackthon-Second\hackathon-todo-phase-V\backend\models\core.py:125: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class UserResponse(BaseModel):
+
+C:\Program Files\Python312\Lib\site-packages\sqlmodel\main.py:582
+C:\Program Files\Python312\Lib\site-packages\sqlmodel\main.py:582
+  C:\Program Files\Python312\Lib\site-packages\sqlmodel\main.py:582: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    new_cls = super().__new__(cls, name, bases, dict_used, **config_kwargs)
+
+tests/unit/test_models.py::test_conversation_creation
+tests/unit/test_models.py::test_conversation_creation
+tests/unit/test_models.py::test_conversation_defaults
+tests/unit/test_models.py::test_conversation_defaults
+tests/unit/test_models.py::test_message_creation
+tests/unit/test_models.py::test_message_enum_values
+tests/unit/test_models.py::test_message_enum_values
+tests/unit/test_models.py::test_message_enum_values
+tests/unit/test_models.py::test_message_optional_fields
+  C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\pydantic\fields.py:747: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    return fac()
+
+tests/unit/test_services.py::test_conversation_service_create_conversation
+  d:\D Data\Hackthon-Second\hackathon-todo-phase-V\backend\services\conversation_service.py:21: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    created_at=datetime.utcnow(),
+
+tests/unit/test_services.py::test_conversation_service_create_conversation
+  d:\D Data\Hackthon-Second\hackathon-todo-phase-V\backend\services\conversation_service.py:22: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    updated_at=datetime.utcnow()
+
+tests/unit/test_services.py::test_conversation_service_update_conversation_title
+  d:\D Data\Hackthon-Second\hackathon-todo-phase-V\backend\services\conversation_service.py:43: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    conversation.updated_at = datetime.utcnow()
+
+tests/unit/test_services.py::test_message_service_create_message
+tests/unit/test_services.py::test_conversation_persistence_save_new_conversation
+  d:\D Data\Hackthon-Second\hackathon-todo-phase-V\backend\services\message_service.py:34: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    timestamp=datetime.utcnow()
+
+tests/unit/test_services.py::test_conversation_persistence_save_message
+  d:\D Data\Hackthon-Second\hackathon-todo-phase-V\backend\services\conversation_service.py:69: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    conversation.updated_at = datetime.utcnow()
+
+tests/unit/test_services.py::test_conversation_loader_load_conversation_history
+  D:\D Data\Hackthon-Second\hackathon-todo-phase-III\backend\tests\unit\test_services.py:201: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    mock_conversation.created_at = datetime.utcnow()
+
+tests/unit/test_services.py::test_conversation_loader_load_conversation_history
+  D:\D Data\Hackthon-Second\hackathon-todo-phase-III\backend\tests\unit\test_services.py:202: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    mock_conversation.updated_at = datetime.utcnow()
+
+tests/test_main.py::test_openapi_schema
+  C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\fastapi\openapi\utils.py:255: UserWarning: Duplicate Operation ID catch_all_api_api__path__post for function catch_all_api at d:\D Data\Hackthon-Second\hackathon-todo-phase-V\backend\index.py
+    warnings.warn(message, stacklevel=1)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 60 passed, 22 warnings in 3.24s =======================

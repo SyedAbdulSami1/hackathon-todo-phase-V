@@ -3,9 +3,15 @@
 import pytest
 import tempfile
 import os
+import sys
 
 # Force SQLite for tests
 os.environ["DATABASE_URL"] = "sqlite:///:memory:"
+
+# Add backend directory to Python path
+backend_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if backend_dir not in sys.path:
+    sys.path.insert(0, backend_dir)
 
 from unittest.mock import MagicMock, patch
 from fastapi.testclient import TestClient

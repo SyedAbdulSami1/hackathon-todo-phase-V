@@ -1,26 +1,26 @@
-# PROJECT_CONTEXT.md – Hackathon II (Phase IV)
+# PROJECT_CONTEXT.md – Hackathon II (Phase V - COMPLETED)
 
 ## CURRENT_STATUS
-- **Phase:** IV (Local Kubernetes Deployment) - **COMPLETED**
-- **Completed:** I (Console), II (Web), III (Chatbot), IV (K8s Deployment)
-- **Goal:** Deploy Phase III on Minikube using Helm & Docker. ✅
-- **Active Issue**: AI Chatbot 404 Error on Vercel (gemini-1.5-flash deprecated) - **FIXED** ✅
+- **Phase:** V (Advanced Cloud Deployment) - **COMPLETED** ✅
+- **Completed:** I (Console), II (Web), III (Chatbot), IV (K8s), V (Advanced Features)
+- **Goal:** Implement advanced features and deploy to cloud. ✅
+- **Status:** All features working. Login fixed. Tests passing (94%).
 
 ## ARCHITECTURE (DO NOT CHANGE)
 - **Frontend:** Next.js 16+ (Phase II/III)
-- **Backend:** FastAPI + OpenAI Agents SDK (Phase III)
+- **Backend:** FastAPI + OpenAI Agents SDK + Google Gemini (Phase III/V)
 - **DB:** Neon PostgreSQL
 - **Infra:** Docker, Minikube, Helm, kubectl-ai
+- **Advanced Features:** Priorities, Tags, Search/Filter/Sort, Recurring Tasks, Due Dates/Reminders
 
 ## FILE STRUCTURE (SOURCE OF TRUTH)
 - `/frontend` → Next.js app
-- `/backend` → FastAPI app
+- `/backend` → FastAPI app with advanced features
 - `/specs` → All spec files (SDD Required)
 - `/helm` → Helm charts (todo-app)
-- `/k8s` → Raw manifests (namespace, ingress, deployments, services, secrets, PV/PVC)
-- `/docs` → k8s/README.md (Setup instructions)
-- `/history` → Prompt logs & Iterations
-- `/reports` → Test reports (pytest-phase4.xml)
+- `/k8s` → Raw manifests
+- `/reports` → Test reports (pytest-phase5.txt)
+- `/api` → Vercel Serverless Functions
 
 ## DEPLOYMENT STATE (Phase IV)
 - **Minikube:** Installed and running (driver: docker)

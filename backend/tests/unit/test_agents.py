@@ -12,7 +12,7 @@ def test_agent_config_initialization():
     """Test AgentConfig initialization with default values."""
     with patch.dict('os.environ', {}, clear=True):
         config = AgentConfig()
-        assert config.model_name == "gpt-4"
+        assert config.model_name == "gemini-2.5-flash"
         assert config.temperature == 0.7
         assert config.max_tokens == 1000
 

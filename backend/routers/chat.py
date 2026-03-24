@@ -94,7 +94,15 @@ async def chat_endpoint(
         # 1. Fetch conversation history from database
         print(f"DEBUG: Fetching history for {conversation_id}...")
         history_messages = []
-        db_history = session.query(Message).filter(Message.conversation_id == conversation_id).order_by(Message.timestamp).all()
+        
+        # Convert conversation_id to UUID for database query
+        from uuid import UUID
+        try:
+            conv_uuid = UUID(conversation_id) if isinstance(conversation_id, str) else conversation_id
+        except (ValueError, AttributeError):
+            conv_uuid = conversation_id
+            
+        db_history = session.query(Message).filter(Message.conversation_id == conv_uuid).order_by(Message.timestamp).all()
         for msg in db_history:
             history_messages.append({
                 "role": msg.sender_type.value,

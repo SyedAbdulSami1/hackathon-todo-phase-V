@@ -1,0 +1,368 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-8.4.0, pluggy-1.6.0 -- C:\Program Files\Python312\python.exe
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.10', 'Platform': 'Windows-10-10.0.19045-SP0', 'Packages': {'pytest': '8.4.0', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.12.1', 'asyncio': '0.24.0', 'cov': '7.0.0', 'metadata': '3.1.1', 'mock': '3.15.1'}}
+rootdir: d:\D Data\Hackthon-Second\hackathon-todo-phase-V\backend
+configfile: pytest.ini
+plugins: anyio-4.12.1, asyncio-0.24.0, cov-7.0.0, metadata-3.1.1, mock-3.15.1
+asyncio: mode=Mode.STRICT, default_loop_scope=None
+collecting ... collected 69 items
+
+tests/integration/test_chat_endpoints.py::test_post_chat_endpoint_success FAILED [  1%]
+tests/integration/test_chat_endpoints.py::test_post_chat_endpoint_missing_message PASSED [  2%]
+tests/integration/test_chat_endpoints.py::test_post_chat_endpoint_invalid_user_id PASSED [  4%]
+tests/integration/test_chat_endpoints.py::test_get_user_conversations PASSED [  5%]
+tests/integration/test_chat_endpoints.py::test_get_conversation_history FAILED [  7%]
+tests/integration/test_chat_endpoints.py::test_get_conversation_history_not_found PASSED [  8%]
+tests/integration/test_chat_endpoints.py::test_get_conversation_history_wrong_user PASSED [ 10%]
+tests/integration/test_chat_endpoints.py::test_post_chat_endpoint_internal_error FAILED [ 11%]
+tests/integration/test_chat_endpoints.py::test_post_chat_endpoint_agent_not_initialized PASSED [ 13%]
+tests/test_main.py::test_app_is_created PASSED                           [ 14%]
+tests/test_main.py::test_root_endpoint PASSED                            [ 15%]
+tests/test_main.py::test_health_check_endpoint PASSED                    [ 17%]
+tests/test_main.py::test_app_has_expected_routes PASSED                  [ 18%]
+tests/test_main.py::test_app_has_correct_tags PASSED                     [ 20%]
+tests/test_main.py::test_openapi_schema PASSED                           [ 21%]
+tests/test_main.py::test_cors_middleware PASSED                          [ 23%]
+tests/test_main.py::test_main_app_lifespan PASSED                        [ 24%]
+tests/test_main.py::test_main_app_lifespan_with_mocked_agent PASSED      [ 26%]
+tests/test_simple_smoke.py::test_app_import PASSED                       [ 27%]
+tests/test_simple_smoke.py::test_models_import PASSED                    [ 28%]
+tests/test_simple_smoke.py::test_auth_import PASSED                      [ 30%]
+tests/unit/test_agents.py::test_agent_config_initialization FAILED       [ 31%]
+tests/unit/test_agents.py::test_agent_config_to_dict PASSED              [ 33%]
+tests/unit/test_agents.py::test_chat_agent_initialization PASSED         [ 34%]
+tests/unit/test_agents.py::test_chat_agent_process_request_basic PASSED  [ 36%]
+tests/unit/test_agents.py::test_chat_agent_process_request_with_tools PASSED [ 37%]
+tests/unit/test_agents.py::test_tool_binder_initialization PASSED        [ 39%]
+tests/unit/test_agents.py::test_agent_factory_create_chat_agent PASSED   [ 40%]
+tests/unit/test_agents.py::test_agent_factory_create_default_agent PASSED [ 42%]
+tests/unit/test_exceptions.py::test_chat_exception_base PASSED           [ 43%]
+tests/unit/test_exceptions.py::test_chat_exception_custom_error_code PASSED [ 44%]
+tests/unit/test_exceptions.py::test_conversation_not_found_exception PASSED [ 46%]
+tests/unit/test_exceptions.py::test_message_not_found_exception PASSED   [ 47%]
+tests/unit/test_exceptions.py::test_unauthorized_access_exception PASSED [ 49%]
+tests/unit/test_exceptions.py::test_tool_execution_exception PASSED      [ 50%]
+tests/unit/test_exceptions.py::test_tool_execution_exception_no_details PASSED [ 52%]
+tests/unit/test_exceptions.py::test_agent_processing_exception PASSED    [ 53%]
+tests/unit/test_exceptions.py::test_agent_processing_exception_no_details PASSED [ 55%]
+tests/unit/test_exceptions.py::test_invalid_request_exception PASSED     [ 56%]
+tests/unit/test_exceptions.py::test_rate_limit_exceeded_exception PASSED [ 57%]
+tests/unit/test_exceptions.py::test_rate_limit_exceeded_exception_default PASSED [ 59%]
+tests/unit/test_exceptions.py::test_database_connection_exception PASSED [ 60%]
+tests/unit/test_exceptions.py::test_database_connection_exception_no_details PASSED [ 62%]
+tests/unit/test_mcp_tools.py::test_base_mcp_tool_abstract PASSED         [ 63%]
+tests/unit/test_mcp_tools.py::test_add_task_tool_properties PASSED       [ 65%]
+tests/unit/test_mcp_tools.py::test_list_tasks_tool_properties PASSED     [ 66%]
+tests/unit/test_mcp_tools.py::test_update_task_tool_properties PASSED    [ 68%]
+tests/unit/test_mcp_tools.py::test_delete_task_tool_properties PASSED    [ 69%]
+tests/unit/test_mcp_tools.py::test_complete_task_tool_properties PASSED  [ 71%]
+tests/unit/test_mcp_tools.py::test_tool_registry_execute_tool PASSED     [ 72%]
+tests/unit/test_mcp_tools.py::test_tool_registry_get_tool_definitions PASSED [ 73%]
+tests/unit/test_models.py::test_conversation_creation PASSED             [ 75%]
+tests/unit/test_models.py::test_conversation_defaults PASSED             [ 76%]
+tests/unit/test_models.py::test_message_creation PASSED                  [ 78%]
+tests/unit/test_models.py::test_message_enum_values PASSED               [ 79%]
+tests/unit/test_models.py::test_message_optional_fields PASSED           [ 81%]
+tests/unit/test_services.py::test_conversation_service_create_conversation PASSED [ 82%]
+tests/unit/test_services.py::test_conversation_service_get_conversation_by_id PASSED [ 84%]
+tests/unit/test_services.py::test_conversation_service_get_user_conversations PASSED [ 85%]
+tests/unit/test_services.py::test_conversation_service_update_conversation_title PASSED [ 86%]
+tests/unit/test_services.py::test_conversation_service_delete_conversation PASSED [ 88%]
+tests/unit/test_services.py::test_message_service_create_message PASSED  [ 89%]
+tests/unit/test_services.py::test_message_service_get_message_by_id PASSED [ 91%]
+tests/unit/test_services.py::test_message_service_get_messages_for_conversation PASSED [ 92%]
+tests/unit/test_services.py::test_conversation_loader_initialization PASSED [ 94%]
+tests/unit/test_services.py::test_conversation_persistence_initialization PASSED [ 95%]
+tests/unit/test_services.py::test_conversation_persistence_save_new_conversation PASSED [ 97%]
+tests/unit/test_services.py::test_conversation_persistence_save_message PASSED [ 98%]
+tests/unit/test_services.py::test_conversation_loader_load_conversation_history PASSED [100%]
+
+================================== FAILURES ===================================
+_______________________ test_post_chat_endpoint_success _______________________
+..\..\hackathon-todo-phase-III\backend\tests\integration\test_chat_endpoints.py:34: in test_post_chat_endpoint_success
+    assert response.status_code == 200
+E   assert 500 == 200
+E    +  where 500 = <Response [500 Internal Server Error]>.status_code
+---------------------------- Captured stdout setup ----------------------------
+Starting up...
+DEBUG: Starting create_db_and_tables...
+DEBUG: create_db_and_tables completed successfully
+Database tables verified/created
+--- ChatAgent Startup ---
+Model: gemini-2.5-flash
+Base URL: https://generativelanguage.googleapis.com/v1beta/openai/
+Chat agent initialized and stored in app state
+---------------------------- Captured stdout call -----------------------------
+DEBUG: Chat endpoint reached for user 1
+DEBUG: Getting chat agent from app state...
+DEBUG: Conversation ID from request: None
+DEBUG: Creating new conversation...
+DEBUG: New conversation created: f1843098-8714-4f9b-9ea7-3c46d0f6d780
+DEBUG: Fetching history for f1843098-8714-4f9b-9ea7-3c46d0f6d780...
+DEBUG: UNEXPECTED ERROR in chat endpoint: (builtins.AttributeError) 'str' object has no attribute 'hex'
+[SQL: SELECT message.id AS message_id, message.conversation_id AS message_conversation_id, message.sender_type AS message_sender_type, message.content AS message_content, message.timestamp AS message_timestamp, message.tool_used AS message_tool_used, message.tool_parameters AS message_tool_parameters, message.tool_result AS message_tool_result, message.message_type AS message_message_type 
+FROM message 
+WHERE message.conversation_id = ? ORDER BY message.timestamp]
+[parameters: [{}]]
+---------------------------- Captured stderr call -----------------------------
+Traceback (most recent call last):
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1815, in _execute_context
+    context = constructor(
+              ^^^^^^^^^^^^
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 1476, in _init_compiled
+    flattened_processors[key](compiled_params[key])
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\sql\sqltypes.py", line 3625, in process
+    value = value.hex
+            ^^^^^^^^^
+AttributeError: 'str' object has no attribute 'hex'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "d:\D Data\Hackthon-Second\hackathon-todo-phase-V\backend\routers\chat.py", line 97, in chat_endpoint
+    db_history = session.query(Message).filter(Message.conversation_id == conversation_id).order_by(Message.timestamp).all()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\query.py", line 2673, in all
+    return self._iter().all()  # type: ignore
+           ^^^^^^^^^^^^
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\query.py", line 2827, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\sqlmodel\orm\session.py", line 142, in execute
+    return super().execute(
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 2362, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 2247, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\context.py", line 305, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1821, in _execute_context
+    self._handle_dbapi_exception(
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1815, in _execute_context
+    context = constructor(
+              ^^^^^^^^^^^^
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 1476, in _init_compiled
+    flattened_processors[key](compiled_params[key])
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\sql\sqltypes.py", line 3625, in process
+    value = value.hex
+            ^^^^^^^^^
+sqlalchemy.exc.StatementError: (builtins.AttributeError) 'str' object has no attribute 'hex'
+[SQL: SELECT message.id AS message_id, message.conversation_id AS message_conversation_id, message.sender_type AS message_sender_type, message.content AS message_content, message.timestamp AS message_timestamp, message.tool_used AS message_tool_used, message.tool_parameters AS message_tool_parameters, message.tool_result AS message_tool_result, message.message_type AS message_message_type 
+FROM message 
+WHERE message.conversation_id = ? ORDER BY message.timestamp]
+[parameters: [{}]]
+[03/24/26 07:40:17] INFO     HTTP Request: POST                 _client.py:1025
+                             http://testserver/api/1/chat                      
+                             "HTTP/1.1 500 Internal Server                     
+                             Error"                                            
+------------------------------ Captured log call ------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/1/chat "HTTP/1.1 500 Internal Server Error"
+-------------------------- Captured stdout teardown ---------------------------
+Shutting down...
+________________________ test_get_conversation_history ________________________
+..\..\hackathon-todo-phase-III\backend\tests\integration\test_chat_endpoints.py:101: in test_get_conversation_history
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+---------------------------- Captured stdout setup ----------------------------
+Starting up...
+DEBUG: Starting create_db_and_tables...
+DEBUG: create_db_and_tables completed successfully
+Database tables verified/created
+--- ChatAgent Startup ---
+Model: gemini-2.5-flash
+Base URL: https://generativelanguage.googleapis.com/v1beta/openai/
+Chat agent initialized and stored in app state
+---------------------------- Captured stderr call -----------------------------
+[03/24/26 07:40:22] INFO     HTTP Request: GET                  _client.py:1025
+                             http://testserver/api/1/conversati                
+                             ons/8294cf75-a76b-4b3a-b9fd-5db253                
+                             831066 "HTTP/1.1 404 Not Found"                   
+------------------------------ Captured log call ------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: GET http://testserver/api/1/conversations/8294cf75-a76b-4b3a-b9fd-5db253831066 "HTTP/1.1 404 Not Found"
+-------------------------- Captured stdout teardown ---------------------------
+Shutting down...
+___________________ test_post_chat_endpoint_internal_error ____________________
+..\..\hackathon-todo-phase-III\backend\tests\integration\test_chat_endpoints.py:164: in test_post_chat_endpoint_internal_error
+    assert "Internal server error" in data["detail"]
+E   assert 'Internal server error' in "(builtins.AttributeError) 'str' object has no attribute 'hex'\n[SQL: SELECT message.id AS message_id, message.conversation_id AS message_conversation_id, message.sender_type AS message_sender_type, message.content AS message_content, message.timestamp AS message_timestamp, message.tool_used AS message_tool_used, message.tool_parameters AS message_tool_parameters, message.tool_result AS message_tool_result, message.message_type AS message_message_type \nFROM message \nWHERE message.conversation_id = ? ORDER BY message.timestamp]\n[parameters: [{}]]"
+---------------------------- Captured stdout setup ----------------------------
+Starting up...
+DEBUG: Starting create_db_and_tables...
+DEBUG: create_db_and_tables completed successfully
+Database tables verified/created
+--- ChatAgent Startup ---
+Model: gemini-2.5-flash
+Base URL: https://generativelanguage.googleapis.com/v1beta/openai/
+Chat agent initialized and stored in app state
+---------------------------- Captured stdout call -----------------------------
+DEBUG: Chat endpoint reached for user 1
+DEBUG: Getting chat agent from app state...
+DEBUG: Conversation ID from request: None
+DEBUG: Creating new conversation...
+DEBUG: New conversation created: 83cca191-dd08-4c41-85bf-a372d6361059
+DEBUG: Fetching history for 83cca191-dd08-4c41-85bf-a372d6361059...
+DEBUG: UNEXPECTED ERROR in chat endpoint: (builtins.AttributeError) 'str' object has no attribute 'hex'
+[SQL: SELECT message.id AS message_id, message.conversation_id AS message_conversation_id, message.sender_type AS message_sender_type, message.content AS message_content, message.timestamp AS message_timestamp, message.tool_used AS message_tool_used, message.tool_parameters AS message_tool_parameters, message.tool_result AS message_tool_result, message.message_type AS message_message_type 
+FROM message 
+WHERE message.conversation_id = ? ORDER BY message.timestamp]
+[parameters: [{}]]
+---------------------------- Captured stderr call -----------------------------
+Traceback (most recent call last):
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1815, in _execute_context
+    context = constructor(
+              ^^^^^^^^^^^^
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 1476, in _init_compiled
+    flattened_processors[key](compiled_params[key])
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\sql\sqltypes.py", line 3625, in process
+    value = value.hex
+            ^^^^^^^^^
+AttributeError: 'str' object has no attribute 'hex'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "d:\D Data\Hackthon-Second\hackathon-todo-phase-V\backend\routers\chat.py", line 97, in chat_endpoint
+    db_history = session.query(Message).filter(Message.conversation_id == conversation_id).order_by(Message.timestamp).all()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\query.py", line 2673, in all
+    return self._iter().all()  # type: ignore
+           ^^^^^^^^^^^^
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\query.py", line 2827, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python312\Lib\site-packages\sqlmodel\orm\session.py", line 142, in execute
+    return super().execute(
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 2362, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 2247, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\context.py", line 305, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1821, in _execute_context
+    self._handle_dbapi_exception(
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1815, in _execute_context
+    context = constructor(
+              ^^^^^^^^^^^^
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 1476, in _init_compiled
+    flattened_processors[key](compiled_params[key])
+  File "C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\sql\sqltypes.py", line 3625, in process
+    value = value.hex
+            ^^^^^^^^^
+sqlalchemy.exc.StatementError: (builtins.AttributeError) 'str' object has no attribute 'hex'
+[SQL: SELECT message.id AS message_id, message.conversation_id AS message_conversation_id, message.sender_type AS message_sender_type, message.content AS message_content, message.timestamp AS message_timestamp, message.tool_used AS message_tool_used, message.tool_parameters AS message_tool_parameters, message.tool_result AS message_tool_result, message.message_type AS message_message_type 
+FROM message 
+WHERE message.conversation_id = ? ORDER BY message.timestamp]
+[parameters: [{}]]
+                    INFO     HTTP Request: POST                 _client.py:1025
+                             http://testserver/api/1/chat                      
+                             "HTTP/1.1 500 Internal Server                     
+                             Error"                                            
+------------------------------ Captured log call ------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/1/chat "HTTP/1.1 500 Internal Server Error"
+-------------------------- Captured stdout teardown ---------------------------
+Shutting down...
+______________________ test_agent_config_initialization _______________________
+tests\unit\test_agents.py:15: in test_agent_config_initialization
+    assert config.model_name == "gpt-4"
+E   AssertionError: assert 'gemini-2.5-flash' == 'gpt-4'
+E     
+E     - gpt-4
+E     + gemini-2.5-flash
+============================== warnings summary ===============================
+models\core.py:84
+  d:\D Data\Hackthon-Second\hackathon-todo-phase-V\backend\models\core.py:84: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class TaskResponse(BaseModel):
+
+models\core.py:125
+  d:\D Data\Hackthon-Second\hackathon-todo-phase-V\backend\models\core.py:125: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class UserResponse(BaseModel):
+
+C:\Program Files\Python312\Lib\site-packages\sqlmodel\main.py:582
+C:\Program Files\Python312\Lib\site-packages\sqlmodel\main.py:582
+  C:\Program Files\Python312\Lib\site-packages\sqlmodel\main.py:582: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    new_cls = super().__new__(cls, name, bases, dict_used, **config_kwargs)
+
+tests/integration/test_chat_endpoints.py: 26 warnings
+tests/unit/test_models.py: 9 warnings
+  C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\pydantic\fields.py:747: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    return fac()
+
+tests/integration/test_chat_endpoints.py::test_post_chat_endpoint_success
+tests/integration/test_chat_endpoints.py::test_post_chat_endpoint_internal_error
+  d:\\D Data\\Hackthon-Second\\hackathon-todo-phase-V\\backend\\routers\\chat.py:97: DeprecationWarning: \n          \U0001f6a8 You probably want to use `session.exec()` instead of `session.query()`.\n  \n          `session.exec()` is SQLModel's own short version with increased type\n          annotations.\n  \n          Or otherwise you might want to use `session.execute()` instead of\n          `session.query()`.\n          \n    db_history = session.query(Message).filter(Message.conversation_id == conversation_id).order_by(Message.timestamp).all()
+
+tests/integration/test_chat_endpoints.py::test_get_user_conversations
+  d:\\D Data\\Hackthon-Second\\hackathon-todo-phase-V\\backend\\routers\\chat.py:182: DeprecationWarning: \n          \U0001f6a8 You probably want to use `session.exec()` instead of `session.query()`.\n  \n          `session.exec()` is SQLModel's own short version with increased type\n          annotations.\n  \n          Or otherwise you might want to use `session.execute()` instead of\n          `session.query()`.\n          \n    conversations = session.query(Conversation).filter(Conversation.user_id == user_id).all()
+
+tests/test_main.py::test_openapi_schema
+  C:\Users\pc\AppData\Roaming\Python\Python312\site-packages\fastapi\openapi\utils.py:255: UserWarning: Duplicate Operation ID catch_all_api_api__path__delete for function catch_all_api at d:\D Data\Hackthon-Second\hackathon-todo-phase-V\backend\index.py
+    warnings.warn(message, stacklevel=1)
+
+tests/unit/test_services.py::test_conversation_service_create_conversation
+  d:\D Data\Hackthon-Second\hackathon-todo-phase-V\backend\services\conversation_service.py:21: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    created_at=datetime.utcnow(),
+
+tests/unit/test_services.py::test_conversation_service_create_conversation
+  d:\D Data\Hackthon-Second\hackathon-todo-phase-V\backend\services\conversation_service.py:22: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    updated_at=datetime.utcnow()
+
+tests/unit/test_services.py::test_conversation_service_update_conversation_title
+  d:\D Data\Hackthon-Second\hackathon-todo-phase-V\backend\services\conversation_service.py:43: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    conversation.updated_at = datetime.utcnow()
+
+tests/unit/test_services.py::test_message_service_create_message
+tests/unit/test_services.py::test_conversation_persistence_save_new_conversation
+  d:\D Data\Hackthon-Second\hackathon-todo-phase-V\backend\services\message_service.py:34: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    timestamp=datetime.utcnow()
+
+tests/unit/test_services.py::test_conversation_persistence_save_message
+  d:\D Data\Hackthon-Second\hackathon-todo-phase-V\backend\services\conversation_service.py:69: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    conversation.updated_at = datetime.utcnow()
+
+tests/unit/test_services.py::test_conversation_loader_load_conversation_history
+  D:\D Data\Hackthon-Second\hackathon-todo-phase-III\backend\tests\unit\test_services.py:201: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    mock_conversation.created_at = datetime.utcnow()
+
+tests/unit/test_services.py::test_conversation_loader_load_conversation_history
+  D:\D Data\Hackthon-Second\hackathon-todo-phase-III\backend\tests\unit\test_services.py:202: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    mock_conversation.updated_at = datetime.utcnow()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/test_chat_endpoints.py::test_post_chat_endpoint_success
+FAILED tests/integration/test_chat_endpoints.py::test_get_conversation_history
+FAILED tests/integration/test_chat_endpoints.py::test_post_chat_endpoint_internal_error
+FAILED tests/unit/test_agents.py::test_agent_config_initialization - Assertio...
+================= 4 failed, 65 passed, 51 warnings in 10.65s ==================
