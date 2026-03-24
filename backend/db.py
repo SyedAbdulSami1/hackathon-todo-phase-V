@@ -20,16 +20,18 @@ if "neon.tech" in DATABASE_URL and "sslmode" not in DATABASE_URL:
     else:
         DATABASE_URL += "?sslmode=require"
 
-# Create SQLModel engine
+# Create SQLModel engine with better connection settings for Neon
 engine_params = {
-    "echo": True,
+    "echo": False,  # Reduce logging noise
+    "pool_pre_ping": True,  # Enable connection health checks
+    "pool_recycle": 300,  # Recycle connections every 5 minutes
 }
 
 # Only add pool_size and max_overflow for non-sqlite databases
 if not DATABASE_URL.startswith("sqlite"):
     engine_params.update({
-        "pool_size": 5,
-        "max_overflow": 10
+        "pool_size": 3,  # Reduced from 5 for Neon free tier
+        "max_overflow": 5,  # Reduced from 10
     })
 else:
     # Special handling for SQLite
