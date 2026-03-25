@@ -1,0 +1,61 @@
+# Dependencies
+node_modules
+npm-debug.log
+yarn-error.log
+yarn.lock
+package-lock.json
+
+# Build output
+.next
+out
+build
+dist
+
+# Development
+.git
+.gitignore
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+*.log
+
+# Testing
+coverage
+.nyc_output
+jest
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+DOCKER_GUIDE.md
+
+# Documentation
+README.md
+*.md
+docs/
+reports/
+specs/
+history/
+contracts/
+
+# Misc
+*.txt
+*.xml
+.pytest_cache/
+__pycache__/
+*.pyc

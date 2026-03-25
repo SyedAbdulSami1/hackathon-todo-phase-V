@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  backend:
+    image: YOUR_DOCKER_USERNAME/todo-backend:latest
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://user:pass@ep-xxx.neon.tech/dbname?sslmode=require
+      - JWT_SECRET=your-secret-key
+      - GOOGLE_API_KEY=your-google-api-key
+      - JWT_ALGORITHM=HS256
+      - ACCESS_TOKEN_EXPIRE_MINUTES=30
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  frontend:
+    image: YOUR_DOCKER_USERNAME/todo-frontend:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - NEXT_PUBLIC_CHAT_ENABLED=true
+    depends_on:
+      backend:
+        condition: service_healthy
+
+# Usage:
+# 1. Replace YOUR_DOCKER_USERNAME with actual username
+# 2. Update environment variables with your values
+# 3. Run: docker-compose up -d
+# 4. Access: http://localhost:3000
