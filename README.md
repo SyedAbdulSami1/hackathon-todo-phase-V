@@ -28,6 +28,7 @@ A premium, startup-quality Todo application featuring an AI Chatbot powered by G
 #### Backend (FastAPI)
 ```bash
 cd backend
+
 python -m venv .venv
 .venv\Scripts\activate  # Windows
 # source .venv/bin/activate  # Linux/Mac
